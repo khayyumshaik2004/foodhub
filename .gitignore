@@ -1,0 +1,23 @@
+# Build outputs
+build/
+bin/
+target/
+*.class
+*.war
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# IDE / Editor temp folders
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# Local configuration / logs
+*.log
+.gemini/
