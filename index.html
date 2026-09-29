@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foodie Hub | Delicious Food Delivered Right to Your Door</title>
+  <meta name="description" content="Explore top-rated restaurants, browse menus, and order your favorite dishes on Foodie Hub with fast delivery and seamless checkout.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Glow Effects -->
+  <div class="bg-glow-1"></div>
+  <div class="bg-glow-2"></div>
+
+  <!-- Top Navigation Bar -->
+  <header>
+    <nav class="navbar" id="mainNavbar">
+      <div class="nav-brand" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+        <div class="brand-icon-wrap">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+        <div>Foodie<span>Hub</span></div>
+      </div>
+
+      <div class="nav-links">
+        <a href="#restaurantsSection" class="nav-link active">
+          <i class="fa-solid fa-house"></i> Home
+        </a>
+        <a href="#restaurantsSection" class="nav-link">
+          <i class="fa-solid fa-fire"></i> Trending
+        </a>
+        <a href="#aboutSection" class="nav-link">
+          <i class="fa-solid fa-circle-info"></i> About
+        </a>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn-cart-trigger" id="cartTriggerBtn" onclick="toggleCartDrawer(true)" aria-label="View Cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span>Cart</span>
+          <span class="cart-badge" id="cartBadgeCount" style="display: none;">0</span>
+        </button>
+
+        <button class="btn-auth" onclick="showToast('Welcome to Foodie Hub! Feel free to explore and order.')">
+          <i class="fa-solid fa-user"></i>
+          <span>Account</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero-section" id="heroSection">
+      <div class="hero-tag">
+        <i class="fa-solid fa-bolt"></i> Premium Cloud Kitchen & Dining
+      </div>
+      <h1 class="hero-title">
+        Discover Flavors & <span>Order Fast</span>
+      </h1>
+      <p class="hero-subtitle">
+        Craving burgers, woodfired pizzas, aromatic biryanis, or fresh street chaat? We deliver from the city’s top gourmet kitchens straight to your doorstep.
+      </p>
+
+      <!-- Search Box -->
+      <div class="search-box-wrap">
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" class="search-input" placeholder="Search restaurant name, dish, or cuisine (e.g. Burger, Biryani, Pizza)..." autocomplete="off">
+          <button class="search-btn" onclick="renderRestaurants()">
+            Search
+          </button>
+        </div>
+      </div>
+
+      <!-- Category Filter Bar -->
+      <div class="category-filter-bar">
+        <button class="filter-pill active" data-filter="All">
+          <i class="fa-solid fa-border-all"></i> All
+        </button>
+        <button class="filter-pill" data-filter="Burgers">
+          <i class="fa-solid fa-burger"></i> Burgers
+        </button>
+        <button class="filter-pill" data-filter="Pizza">
+          <i class="fa-solid fa-pizza-slice"></i> Pizza
+        </button>
+        <button class="filter-pill" data-filter="Mains">
+          <i class="fa-solid fa-bowl-rice"></i> Biryani & Mains
+        </button>
+        <button class="filter-pill" data-filter="Starters">
+          <i class="fa-solid fa-pepper-hot"></i> Starters & Chaat
+        </button>
+        <button class="filter-pill" data-filter="Desserts">
+          <i class="fa-solid fa-ice-cream"></i> Desserts
+        </button>
+        <button class="filter-pill" data-filter="Beverages">
+          <i class="fa-solid fa-mug-hot"></i> Beverages
+        </button>
+      </div>
+    </section>
+
+    <!-- Restaurants Section -->
+    <section class="section-container" id="restaurantsSection">
+      <div class="section-head-bar">
+        <div>
+          <h3>Featured Restaurants</h3>
+          <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Handpicked kitchens serving delectable meals made fresh to order</p>
+        </div>
+        <div class="count-indicator" id="restaurantCount">
+          11 restaurants available
+        </div>
+      </div>
+
+      <!-- Restaurant Cards Grid -->
+      <div class="restaurant-grid" id="restaurantGrid">
+        <!-- Rendered via JavaScript -->
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section-container" id="aboutSection" style="padding-top: 0;">
+      <div style="background: var(--surface-1); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: 40px; text-align: center; max-width: 900px; margin: 0 auto;">
+        <i class="fa-solid fa-heart" style="font-size: 32px; color: var(--accent); margin-bottom: 16px;"></i>
+        <h3 style="font-family: var(--font-display); font-size: 24px; margin-bottom: 12px;">Crafted for Food Lovers</h3>
+        <p style="color: var(--text-secondary); font-size: 15px; line-height: 1.6; max-width: 700px; margin: 0 auto;">
+          Foodie Hub brings together full-stack culinary excellence — from cloud kitchen menus to lightning-fast deliveries. Browse authentic cuisines, customize your order, and experience seamless dining right from your browser.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       Restaurant Menu Modal (SPA Overlay)
+       ========================================================================== -->
+  <div class="menu-view-modal" id="menuViewModal" role="dialog" aria-modal="true">
+    <div class="menu-view-container">
+      
+      <!-- Top Action Bar -->
+      <div class="menu-top-nav">
+        <button class="btn-back-home" onclick="closeRestaurantMenu()">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Back to Restaurants</span>
+        </button>
+        <button class="btn-cart-trigger" onclick="toggleCartDrawer(true)">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span>View Cart</span>
+          <span class="cart-badge" id="cartBadgeTotal">0</span>
+        </button>
+      </div>
+
+      <!-- Restaurant Banner -->
+      <div class="restaurant-banner-card">
+        <div class="banner-thumb">
+          <img id="bannerThumbImg" src="" alt="Restaurant">
+        </div>
+        <div class="banner-info">
+          <h2 id="bannerName">Restaurant Name</h2>
+          <div class="banner-cuisine" id="bannerCuisine">Cuisine details</div>
+          <div class="banner-stats">
+            <span class="banner-stat-item">
+              <i class="fa-solid fa-star" style="color: #ffc947;"></i>
+              <strong id="bannerRating" style="color: var(--text-primary);">4.5</strong> Rating
+            </span>
+            <span class="banner-stat-item">
+              <i class="fa-solid fa-clock" style="color: var(--accent);"></i>
+              <span id="bannerTime">30 min</span>
+            </span>
+            <span class="banner-stat-item">
+              <i class="fa-solid fa-wallet" style="color: var(--success);"></i>
+              <span id="bannerPrice">₹400 for two</span>
+            </span>
+            <span class="banner-stat-item">
+              <i class="fa-solid fa-location-dot" style="color: var(--text-muted);"></i>
+              <span id="bannerAddress">12 Main Street</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Menu Category Tabs -->
+      <div class="menu-tabs-bar" id="menuTabsBar">
+        <!-- Rendered via JavaScript -->
+      </div>
+
+      <!-- Menu Items Grid -->
+      <div class="menu-items-grid" id="menuItemsGrid">
+        <!-- Rendered via JavaScript -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Cart Slide-out Drawer
+       ========================================================================== -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="toggleCartDrawer(false)"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>
+        <i class="fa-solid fa-basket-shopping" style="color: var(--accent);"></i>
+        Your Order Cart
+      </h3>
+      <button class="btn-close-cart" onclick="toggleCartDrawer(false)" aria-label="Close Cart">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Items List -->
+    <div class="cart-body" id="cartItemsContainer">
+      <!-- Rendered via JavaScript -->
+    </div>
+
+    <!-- Bill Details & Proceed -->
+    <div class="cart-footer">
+      <div class="bill-row">
+        <span>Item Subtotal</span>
+        <strong id="cartSubtotal">₹0</strong>
+      </div>
+      <div class="bill-row">
+        <span>Delivery Fee</span>
+        <strong id="cartDelivery">₹0</strong>
+      </div>
+      <div class="bill-row">
+        <span>Taxes & Charges (5%)</span>
+        <strong id="cartTax">₹0</strong>
+      </div>
+      <div class="bill-row total-row">
+        <span>Grand Total</span>
+        <span id="cartTotal" style="color: var(--accent-secondary);">₹0</span>
+      </div>
+
+      <button class="btn-proceed-checkout" id="btnProceedCheckout" onclick="openCheckoutModal()">
+        <span>Proceed to Checkout</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       Checkout Modal
+       ========================================================================== -->
+  <div class="checkout-modal-overlay" id="checkoutModal">
+    <div class="checkout-card">
+      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+        <h3 class="checkout-title">
+          <i class="fa-solid fa-truck-fast" style="color: var(--accent);"></i>
+          Delivery & Payment
+        </h3>
+        <button class="btn-close-cart" onclick="closeCheckoutModal()">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <p class="checkout-subtitle" id="checkoutTotalSummary">Enter your details to confirm your feast</p>
+
+      <form id="checkoutForm" onsubmit="handlePlaceOrder(event)">
+        <div class="form-group">
+          <label class="form-label" for="orderName">Full Name</label>
+          <input type="text" id="orderName" class="form-control" placeholder="e.g. Khayyum Shaik" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="orderPhone">Mobile Number</label>
+          <input type="tel" id="orderPhone" class="form-control" placeholder="e.g. +91 98765 43210" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="orderAddress">Delivery Address</label>
+          <textarea id="orderAddress" class="form-control" rows="2" placeholder="House/Flat No, Street, Landmark, City..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Select Payment Method</label>
+          <div class="payment-methods-grid">
+            <div class="payment-method-box selected" onclick="selectPaymentMethod('UPI', this)">
+              <i class="fa-solid fa-mobile-screen-button"></i>
+              <span>UPI / QR</span>
+            </div>
+            <div class="payment-method-box" onclick="selectPaymentMethod('Cash on Delivery', this)">
+              <i class="fa-solid fa-money-bill-wave"></i>
+              <span>Cash on Delivery</span>
+            </div>
+            <div class="payment-method-box" onclick="selectPaymentMethod('Card', this)">
+              <i class="fa-solid fa-credit-card"></i>
+              <span>Debit / Credit Card</span>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-place-order">
+          <i class="fa-solid fa-check"></i> Place Order Now
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Order Success Modal
+       ========================================================================== -->
+  <div class="order-success-modal" id="orderSuccessModal">
+    <div class="success-card">
+      <div class="success-icon-wrap">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h2>Order Placed Successfully!</h2>
+      <p>Your food is being freshly prepared and will be delivered hot in approximately 25-30 minutes.</p>
+
+      <div class="order-receipt-box">
+        <div class="receipt-line">
+          <span>Order Reference:</span>
+          <strong id="receiptOrderId">#FH-12345</strong>
+        </div>
+        <div class="receipt-line">
+          <span>Customer:</span>
+          <strong id="receiptCustomer">Khayyum Shaik</strong>
+        </div>
+        <div class="receipt-line">
+          <span>Items Ordered:</span>
+          <strong id="receiptCount">2 items</strong>
+        </div>
+        <div class="receipt-line">
+          <span>Payment Mode:</span>
+          <strong id="receiptPayment">UPI</strong>
+        </div>
+        <div class="receipt-line" style="border-top: 1px dashed var(--border-medium); padding-top: 8px; margin-top: 8px;">
+          <span>Total Paid:</span>
+          <strong id="receiptTotal" style="color: var(--accent-secondary); font-size: 16px;">₹349</strong>
+        </div>
+      </div>
+
+      <button class="btn-done-order" onclick="closeOrderSuccessModal()">
+        <i class="fa-solid fa-bowl-food"></i> Order More Food
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>&copy; 2026 <span>Foodie Hub</span>. All rights reserved. Made with &hearts; for food lovers.</p>
+  </footer>
+
+  <!-- Application Engine -->
+  <script src="app.js"></script>
+</body>
+</html>
